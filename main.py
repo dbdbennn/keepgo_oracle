@@ -2,6 +2,7 @@ import subprocess
 import cx_Oracle
 from tabulate import tabulate
 from printFridge import printFridge  # Import the function from the separate file
+from inputFridge import inputFridge
 
 
 # 모듈 설치 함수
@@ -73,7 +74,7 @@ table_count = new_cursor.fetchone()[0]
 if table_count == 0:
     create_table_query = """
         CREATE TABLE Fridge (
-            food_name VARCHAR2(255),
+            food_name VARCHAR2(255) primary key,
             expiration_date DATE,
             food_pieces NUMBER(3)
         )
@@ -113,6 +114,8 @@ def main():
 
         if menu == "1":
             printFridge(new_cursor)  # printFridge 함수 실행
+        elif menu == "2":
+            inputFridge(new_cursor)
         elif menu == "5":
             print("프로그램을 종료합니다.")
             break  # 무한 루프 종료
