@@ -7,6 +7,7 @@ def printFridge(new_cursor):
     select_data_query = """
         SELECT *
         FROM Fridge
+        ORDER BY EXPIRATION_DATE
     """
 
     new_cursor.execute(select_data_query)

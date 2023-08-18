@@ -3,6 +3,7 @@ import cx_Oracle
 from tabulate import tabulate
 from printFridge import printFridge  # Import the function from the separate file
 from inputFridge import inputFridge
+from deleteFridge import deleteFridge
 
 
 # 모듈 설치 함수
@@ -116,6 +117,8 @@ def main():
             printFridge(new_cursor)  # printFridge 함수 실행
         elif menu == "2":
             inputFridge(new_cursor)
+        elif menu == "4":
+            deleteFridge(new_cursor)
         elif menu == "5":
             print("프로그램을 종료합니다.")
             break  # 무한 루프 종료

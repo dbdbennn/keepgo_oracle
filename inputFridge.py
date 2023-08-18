@@ -35,3 +35,7 @@ def inputFridge(cursor):
     )
     cursor.connection.commit()
     print("\n\t\t" + name + "을(를) 넣었습니다!")
+    print()
+    inputMeun = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
+    if str(type(inputMeun)) == "<class 'str'>":
+        return
