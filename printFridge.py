@@ -4,6 +4,9 @@ import date_calculate as dc
 
 
 def printFridge(new_cursor):
+    print()
+    print(sc.str_Yellow("냉장고 열어보기 * 🍅 * 🥕 * 🥬 * 🥩 * 🥚 * 🍇 * 🥔 * 🧀"))
+    print()
     select_data_query = """
         SELECT *
         FROM Fridge
