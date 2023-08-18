@@ -7,6 +7,10 @@ def inputFridge(cursor):
     while True:
         name = input("\n\t무슨 음식인가요? > ")
 
+        if not name.strip():  # Check if the input is empty or just whitespace
+            print("\n\t\033[31m❗ 음식 이름을 입력해주세요.\033[0m")
+            continue
+
         # Check if the food_name already exists in the database
         cursor.execute(
             "SELECT COUNT(*) FROM Fridge WHERE food_name = :food_name",
@@ -47,6 +51,3 @@ def inputFridge(cursor):
     inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
     if isinstance(inputMenu, str):
         return
-
-
-# main 부분 등이 아직 누락되어 있음
