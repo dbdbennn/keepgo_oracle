@@ -40,3 +40,7 @@ def deleteFridge(cursor):
         print("\n\t\t" + sc.str_Blue(name) + "을(를) 모두 꺼냈습니다!")
     else:
         print("\n\t\t" + sc.str_Blue(name) + "을(를) " + str(amount) + "개 꺼냈습니다!")
+    print()
+    inputMeun = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
+    if str(type(inputMeun)) == "<class 'str'>":
+        return
