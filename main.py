@@ -13,6 +13,7 @@ from printFridge import printFridge
 from inputFridge import inputFridge
 from deleteFridge import deleteFridge
 from setFridge import setFridge
+from exdateFridge import exdateFridge
 import strChanger as sc
 import cx_Oracle
 
@@ -44,7 +45,9 @@ if user_count == 0:
     new_username = "KEEPGO"
     new_password = "keepgo"
     admin_cursor.execute(f"CREATE USER {new_username} IDENTIFIED BY {new_password}")
-    admin_cursor.execute(f"GRANT CONNECT, RESOURCE TO {new_username}")
+    admin_cursor.execute(
+        f"GRANT CONNECT, RESOURCE, CREATE VIEW, DROP ANY VIEW TO {new_username}"
+    )
     print("User 'KEEPGO' created successfully.")
 
 # 사용자 'KEEPGO' 계정으로 연결
@@ -109,10 +112,11 @@ def main():
 |                                                    |"""
         )
         print("|\t\t1. 냉장고 열어보기                   |")
-        print("|\t\t2. 냉장고에 음식 넣기                |")
-        print("|\t\t3. 음식 정보 바꾸기                  |")
-        print("|\t\t4. 냉장고에서 음식 꺼내기            |")
-        print("|\t\t5. 프로그램 종료                     |")
+        print("|\t\t2. 기한별로 갯수보기                 |")
+        print("|\t\t3. 냉장고에 음식 넣기                |")
+        print("|\t\t4. 음식 정보 바꾸기                  |")
+        print("|\t\t5. 냉장고에서 음식 꺼내기            |")
+        print("|\t\t6. 프로그램 종료                     |")
         print("|" + "_" * 52 + "|")
         print()
         # 메뉴창 출력 끝
@@ -123,20 +127,22 @@ def main():
         if menu == "1":
             printFridge(new_cursor)  # printFridge 함수 실행
         elif menu == "2":
-            inputFridge(new_cursor)
+            exdateFridge(new_cursor)  # exdateFridge 함수 실행
         elif menu == "3":
-            setFridge(new_cursor)
+            inputFridge(new_cursor)
         elif menu == "4":
-            deleteFridge(new_cursor)
+            setFridge(new_cursor)
         elif menu == "5":
+            deleteFridge(new_cursor)
+        elif menu == "6":
             print()
             isExit = input(
                 sc.str_Green(
                     """
     \t정말 keep Go를 나가시겠습니까? 🥺
 
-   \t나가시겠다면 아무 키를,
-   \t메뉴로 돌아가려면 1을 입력하세요 > """
+    \t나가시겠다면 아무 키를,
+    \t메뉴로 돌아가려면 1을 입력하세요 > """
                 )
             )
             if isExit == "1":
@@ -144,8 +150,42 @@ def main():
             else:
                 exit()
             break  # 무한 루프 종료
-        else:
-            print("잘못된 입력입니다. 다시 선택해주세요.")
+        else:  # 다른 수(str형태)가 입력됐을 때 while문을 돌린다.
+            while (
+                menu != "1"
+                and menu != "2"
+                and menu != "3"
+                and menu != "4"
+                and menu != "5"
+            ):
+                print()
+                menu = input("\t다시 선택해주세요 > ")
+                if menu == "1":
+                    printFridge(new_cursor)  # printFridge 함수 실행
+                elif menu == "2":
+                    exdateFridge(new_cursor)  # exdateFridge 함수 실행
+                elif menu == "3":
+                    inputFridge(new_cursor)
+                elif menu == "4":
+                    setFridge(new_cursor)
+                elif menu == "5":
+                    deleteFridge(new_cursor)
+                elif menu == "6":
+                    print()
+                    isExit = input(
+                        sc.str_Green(
+                            """
+    \t정말 keep Go를 나가시겠습니까? 🥺
+
+    \t나가시겠다면 아무 키를,
+    \t메뉴로 돌아가려면 1을 입력하세요 > """
+                        )
+                    )
+                    if isExit == "1":
+                        main()
+                    else:
+                        exit()
+                    break  # 무한 루프 종료
 
     # 프로그램 종료 시에만 연결 해제
     if new_cursor:

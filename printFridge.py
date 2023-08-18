@@ -7,6 +7,7 @@ def printFridge(new_cursor):
     print()
     print(sc.str_Yellow("냉장고 열어보기 * 🍅 * 🥕 * 🥬 * 🥩 * 🥚 * 🍇 * 🥔 * 🧀"))
     print()
+
     select_data_query = """
         SELECT *
         FROM Fridge
@@ -22,7 +23,6 @@ def printFridge(new_cursor):
         inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
         if isinstance(inputMenu, str):
             return
-
     else:
         table_data = []
         for row in selected_data:
@@ -43,7 +43,7 @@ def printFridge(new_cursor):
         )
 
         print(table)
-        print()
+
         inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
         if isinstance(inputMenu, str):
             return
