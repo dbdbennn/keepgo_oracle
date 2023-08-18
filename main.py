@@ -4,6 +4,8 @@ from tabulate import tabulate
 from printFridge import printFridge  # Import the function from the separate file
 from inputFridge import inputFridge
 from deleteFridge import deleteFridge
+from setFridge import setFridge
+import strChanger as sc
 
 
 # 모듈 설치 함수
@@ -117,10 +119,25 @@ def main():
             printFridge(new_cursor)  # printFridge 함수 실행
         elif menu == "2":
             inputFridge(new_cursor)
+        elif menu == "3":
+            setFridge(new_cursor)
         elif menu == "4":
             deleteFridge(new_cursor)
         elif menu == "5":
-            print("프로그램을 종료합니다.")
+            print()
+            isExit = input(
+                sc.str_Green(
+                    """
+    \t정말 keep Go를 나가시겠습니까? 🥺
+
+   \t나가시겠다면 아무 키를,
+   \t메뉴로 돌아가려면 1을 입력하세요 > """
+                )
+            )
+            if isExit == "1":
+                main()
+            else:
+                exit()
             break  # 무한 루프 종료
         else:
             print("잘못된 입력입니다. 다시 선택해주세요.")
