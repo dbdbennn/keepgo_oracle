@@ -1,4 +1,4 @@
-from tabulate import tabulate  # 이 라인을 추가해주세요.
+from tabulate import tabulate
 from isDate import isDate
 
 
@@ -6,12 +6,11 @@ def setFridge(cursor):
     print()
     print("음식 정보 바꾸기 • 🍅 • 🥕 • 🥬 • 🥩 • 🥚 • 🍇 • 🥔 • 🥗")
 
-    # Oracle에서 데이터를 가져와서 처리
     cursor.execute("SELECT food_name FROM Fridge")
     fridge = [row[0] for row in cursor.fetchall()]
 
     if len(fridge) == 0:
-        print("\n\t  ❗ 음식이 없어 수정할 수 없습니다.")
+        print("\n\t  \033[31m❗ 음식이 없어 수정할 수 없습니다.\033[0m")
         return
 
     name = input("\n\t수정할 음식은? > ")
@@ -29,8 +28,6 @@ def setFridge(cursor):
 
     if menu == "1":
         new_name = input("\n\t무슨 음식인가요? > ")
-        # Oracle SQL로 데이터 업데이트 수행
-
         cursor.execute(
             "UPDATE Fridge SET food_name = :new_name WHERE food_name = :name",
             {"new_name": new_name, "name": name},
@@ -48,7 +45,6 @@ def setFridge(cursor):
                 break
             else:
                 print("\033[31m" + "\n\t❗ 숫자만 입력해주세요." + "\033[0m")
-
         cursor.execute(
             "UPDATE Fridge SET food_pieces = :new_num WHERE food_name = :name",
             {"new_num": new_num, "name": name},
@@ -63,7 +59,6 @@ def setFridge(cursor):
                 break
             else:
                 print("\033[31m" + "\n\t❗ YYYY-MM-DD 형태로 입력해주세요." + "\033[0m")
-
         cursor.execute(
             "UPDATE Fridge SET expiration_date = TO_DATE(:new_date, 'YYYY-MM-DD') WHERE food_name = :name",
             {"new_date": new_date, "name": name},
@@ -71,6 +66,6 @@ def setFridge(cursor):
         cursor.connection.commit()
         print("\n\t\t" + name + "의 유통기한을 " + new_date + "로 수정했습니다!")
         print()
-        inputMeun = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
-        if str(type(inputMeun)) == "<class 'str'>":
+        inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
+        if isinstance(inputMenu, str):
             return
