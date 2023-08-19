@@ -35,7 +35,7 @@ def setFridge(cursor):
         cursor.connection.commit()
         fridge.remove(name)
         fridge.append(new_name)
-        print("\n\t\t" + new_name + "을(를) 수정했습니다!")
+        print("\n\t" + new_name + "을(를) 수정했습니다!")
 
     elif menu == "2":
         while True:
@@ -50,7 +50,7 @@ def setFridge(cursor):
             {"new_num": new_num, "name": name},
         )
         cursor.connection.commit()
-        print("\n\t\t" + name + "의 갯수를 " + str(new_num) + "개로 수정했습니다!")
+        print("\n\t" + name + "의 갯수를 " + str(new_num) + "개로 수정했습니다!")
 
     elif menu == "3":
         while True:
@@ -64,7 +64,7 @@ def setFridge(cursor):
             {"new_date": new_date, "name": name},
         )
         cursor.connection.commit()
-        print("\n\t\t" + name + "의 유통기한을 " + new_date + "로 수정했습니다!")
+        print("\n\t" + name + "의 유통기한을 " + new_date + "로 수정했습니다!")
         print()
         inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
         if isinstance(inputMenu, str):
