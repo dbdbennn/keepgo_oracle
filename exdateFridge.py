@@ -9,10 +9,10 @@ def exdateFridge(new_cursor):
     create_view_query = """
         CREATE OR REPLACE VIEW ExpirationCountsView AS
             SELECT
-                SUM(CASE WHEN expiration_date < SYSDATE THEN food_pieces ELSE 0 END) AS expired,
-                SUM(CASE WHEN expiration_date - SYSDATE <= 7 AND expiration_date - SYSDATE >= 1 THEN food_pieces ELSE 0 END) AS within_7_days,
-                SUM(CASE WHEN expiration_date - SYSDATE <= 30 AND expiration_date - SYSDATE >= 8 THEN food_pieces ELSE 0 END) AS within_30_days,
-                SUM(CASE WHEN expiration_date > SYSDATE + 30 THEN food_pieces ELSE 0 END) AS more_than_30_days
+                (SELECT SUM(food_pieces) FROM Fridge WHERE expiration_date < SYSDATE) AS expired,
+                (SELECT SUM(food_pieces) FROM Fridge WHERE expiration_date - SYSDATE <= 7 AND expiration_date - SYSDATE >= 1) AS within_7_days,
+                (SELECT SUM(food_pieces) FROM Fridge WHERE expiration_date - SYSDATE <= 30 AND expiration_date - SYSDATE >= 8) AS within_30_days,
+                (SELECT SUM(food_pieces) FROM Fridge WHERE expiration_date > SYSDATE + 30) AS more_than_30_days
             FROM Fridge
         """
     new_cursor.execute(create_view_query)
