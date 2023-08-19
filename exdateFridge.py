@@ -23,10 +23,10 @@ def exdateFridge(new_cursor):
 
     print()
     table_data = [
-        ["유통기한 지남", expiration_counts[0]],
-        ["7일 이하", expiration_counts[1]],
-        ["한달 이하", expiration_counts[2]],
-        ["한달 이상", expiration_counts[3]],
+        [sc.str_bRed("유통기한 지남"), expiration_counts[0]],
+        [sc.str_Red("7일 이하"), expiration_counts[1]],
+        [sc.str_Yellow("한달 이하"), expiration_counts[2]],
+        [sc.str_Blue("한달 이상"), expiration_counts[3]],
     ]
 
     table_headers = ["남은기한", "음식 갯수"]
