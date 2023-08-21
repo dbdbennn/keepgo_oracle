@@ -22,13 +22,19 @@ def deleteFridge(cursor):
 
     available_pieces = fridge_data[name]
 
-    amount = int(input("\n\t\t꺼낼 음식의 갯수는? > "))
-    while amount <= 0 or amount > available_pieces:
+    while True:
+        amount_input = input("\n\t\t꺼낼 음식의 갯수는? > ")
+        if not amount_input.isdigit():
+            print(sc.str_Red("\n\t\t\033[31m❗ 숫자만 입력해주세요.\033[0m"))
+            continue
+
+        amount = int(amount_input)
         if amount <= 0:
             print(sc.str_Red("\n\t\t\033[31m❗ 입력한 음식의 갯수가 올바르지 않습니다.\033[0m"))
-        else:
+        elif amount > available_pieces:
             print(sc.str_Red("\n\t\t\033[31m❗ 초과하여 꺼낼 수 없습니다.\033[0m"))
-        amount = int(input("\n\t\t꺼낼 음식의 갯수는? > "))
+        else:
+            break
 
     cursor.execute(
         "UPDATE Fridge SET food_pieces = food_pieces - :amount WHERE food_name = :name",
