@@ -1,4 +1,5 @@
 import isDate as id
+import strChanger as sc
 
 
 def inputFridge(cursor):
@@ -46,7 +47,7 @@ def inputFridge(cursor):
         },
     )
     cursor.connection.commit()
-    print("\n\t\t" + name + "을(를) 넣었습니다!")
+    print("\n\t\t" + sc.str_Blue(name) + "을(를) 넣었습니다!")
     print()
     inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
     if isinstance(inputMenu, str):
