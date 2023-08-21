@@ -51,6 +51,8 @@ if user_count == 0:
         f"GRANT CONNECT, RESOURCE, CREATE VIEW, DROP ANY VIEW TO {new_username}"
     )
     print("User 'KEEPGO' created successfully.")
+else:
+    print("User 'KEEPGO' already exists.")
 
 # 사용자 'KEEPGO' 계정으로 연결
 new_dsn = cx_Oracle.makedsn(hostname, port, service_name=service_name)
@@ -79,6 +81,8 @@ if table_count == 0:
     print("Table 'FRIDGE' created successfully.")
 else:
     print("Table 'FRIDGE' already exists.")
+
+print("All settings are Successful!")
 
 
 ####################################################
