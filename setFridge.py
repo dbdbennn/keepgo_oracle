@@ -59,12 +59,23 @@ def setFridge(cursor):
                 break
             else:
                 print("\033[31m" + "\n\t❗ 숫자만 입력해주세요." + "\033[0m")
-        cursor.execute(
-            "UPDATE Fridge SET food_pieces = :new_num WHERE food_name = :name",
-            {"new_num": new_num, "name": name},
-        )
-        cursor.connection.commit()
-        print("\n\t" + sc.str_Blue(name) + "의 갯수를 " + str(new_num) + "개로 수정했습니다!")
+
+        if new_num == 0:  # Check if quantity is set to 0
+            cursor.execute("DELETE FROM Fridge WHERE food_name = :name", {"name": name})
+            cursor.connection.commit()
+            print("\n\t" + sc.str_Blue(name) + "을(를) 삭제했습니다!")
+        else:
+            cursor.execute(
+                "UPDATE Fridge SET food_pieces = :new_num WHERE food_name = :name",
+                {"new_num": new_num, "name": name},
+            )
+            cursor.connection.commit()
+            print("\n\t" + sc.str_Blue(name) + "의 갯수를 " + str(new_num) + "개로 수정했습니다!")
+
+        print()
+        inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
+        if isinstance(inputMenu, str):
+            return
 
     elif menu == "3":
         while True:
