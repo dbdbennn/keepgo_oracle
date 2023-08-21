@@ -10,7 +10,10 @@ def deleteFridge(cursor):
 
     if not fridge_data:
         print("\n\t  \033[31m❗ 음식이 없어 꺼낼 수 없습니다.\033[0m")
-        return
+        print()
+        inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
+        if isinstance(inputMenu, str):
+            return
 
     name = input("\n\t\t꺼낼 음식은? > ")
     while name not in fridge_data:
