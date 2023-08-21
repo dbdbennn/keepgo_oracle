@@ -14,6 +14,7 @@ from inputFridge import inputFridge
 from deleteFridge import deleteFridge
 from setFridge import setFridge
 from exdateFridge import exdateFridge
+from exitFridge import exitFridge
 import strChanger as sc
 import cx_Oracle
 
@@ -136,16 +137,7 @@ def main():
         elif menu == "5":
             deleteFridge(new_cursor)
         elif menu == "6":
-            print()
-            isExit = input(
-                sc.str_Green(
-                    """
-    \t정말 keep Go를 나가시겠습니까? 🥺
-
-    \t나가시겠다면 아무 키를,
-    \t메뉴로 돌아가려면 1을 입력하세요 > """
-                )
-            )
+            isExit = exitFridge()
             if isExit == "1":
                 main()
             else:
@@ -172,16 +164,7 @@ def main():
                 elif menu == "5":
                     deleteFridge(new_cursor)
                 elif menu == "6":
-                    print()
-                    isExit = input(
-                        sc.str_Green(
-                            """
-    \t정말 keep Go를 나가시겠습니까? 🥺
-
-    \t나가시겠다면 아무 키를,
-    \t메뉴로 돌아가려면 1을 입력하세요 > """
-                        )
-                    )
+                    isExit = exitFridge()
                     if isExit == "1":
                         main()
                     else:
