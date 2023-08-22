@@ -25,10 +25,14 @@ def exdateFridge(new_cursor):
     create_view_query = """
         CREATE OR REPLACE VIEW ExpirationCountsView AS
             SELECT
-                (SELECT SUM(food_pieces) FROM Fridge WHERE expiration_date < SYSDATE) AS expired,
-                (SELECT SUM(food_pieces) FROM Fridge WHERE expiration_date - SYSDATE <= 7 AND expiration_date - SYSDATE >= 1) AS within_7_days,
-                (SELECT SUM(food_pieces) FROM Fridge WHERE expiration_date - SYSDATE <= 30 AND expiration_date - SYSDATE >= 8) AS within_30_days,
-                (SELECT SUM(food_pieces) FROM Fridge WHERE expiration_date > SYSDATE + 30) AS more_than_30_days
+                (SELECT SUM(food_pieces) FROM Fridge 
+                    WHERE expiration_date < SYSDATE) AS expired,
+                (SELECT SUM(food_pieces) FROM Fridge 
+                    WHERE expiration_date - SYSDATE <= 7 AND expiration_date - SYSDATE >= 1) AS within_7_days,
+                (SELECT SUM(food_pieces) FROM Fridge 
+                    WHERE expiration_date - SYSDATE <= 30 AND expiration_date - SYSDATE >= 8) AS within_30_days,
+                (SELECT SUM(food_pieces) FROM Fridge 
+                    WHERE expiration_date > SYSDATE + 30) AS more_than_30_days
             FROM Fridge
         """
     new_cursor.execute(create_view_query)
@@ -46,7 +50,12 @@ def exdateFridge(new_cursor):
     ]
 
     table_headers = ["남은기한", "음식 갯수"]
-    table = tabulate(table_data, headers=table_headers, tablefmt="rounded_grid")
+    table = tabulate(
+        table_data,
+        headers=table_headers,
+        tablefmt="rounded_grid",
+        stralign="center",
+    )
 
     print(table)
     print()

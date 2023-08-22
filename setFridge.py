@@ -1,5 +1,6 @@
 from tabulate import tabulate
 from isDate import isDate
+from datetime import datetime
 import strChanger as sc
 
 
@@ -22,17 +23,29 @@ def setFridge(cursor):
     name = input("\n\t수정할 음식은? > ")
     matching_items = [(row[0], row[1]) for row in fridge_data if row[1] == name]
 
-    if len(matching_items) == 0:
-        print("\033[31m" + "\n\t\t❗ 입력한 음식이 없습니다." + "\033[0m")
-        return
+    while True:
+        if len(matching_items) == 0:
+            print("\033[31m" + "\n\t\t❗ 입력한 음식이 없습니다." + "\033[0m")
+            name = input("\n\t수정할 음식은? > ")
+            matching_items = [(row[0], row[1]) for row in fridge_data if row[1] == name]
+        else:
+            break
 
     if len(matching_items) > 1:
-        table_headers = ["food_id", "음식 이름", "유통기한", "음식 갯수"]
+        table_headers = ["food_id", "음식 이름", "음식 갯수", "유통기한"]
         table_data = [
-            (row[0], row[1], row[3], row[2]) for row in fridge_data if row[1] == name
+            (row[0], row[1], row[3], row[2].strftime("%Y-%m-%d"))
+            for row in fridge_data
+            if row[1] == name
         ]
         print(
-            "\n" + tabulate(table_data, headers=table_headers, tablefmt="rounded_grid")
+            "\n"
+            + tabulate(
+                table_data,
+                headers=table_headers,
+                tablefmt="rounded_grid",
+                stralign="center",
+            )
         )
         food_id = input("\n\t수정할 음식의 ID를 입력하세요 > ")
         while not food_id.isdigit() or int(food_id) not in [
