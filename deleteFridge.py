@@ -2,11 +2,14 @@ import strChanger as sc
 from tabulate import tabulate
 
 
-def deleteFridge(cursor):
+def deleteFridge(cursor, logged_in_user):
     print()
     print(sc.str_Cyan("냉장고에서 음식 꺼내기 - 🍅 - 🥕 - 🥬 - 🥩 - 🥚 - 🍇 - 🥔 - 🍠"))
 
-    cursor.execute("SELECT food_id, food_name, food_pieces FROM Fridge")
+    cursor.execute(
+        "SELECT food_id, food_name, food_pieces FROM Fridge WHERE user_id = :logged_in_user",
+        {"logged_in_user": logged_in_user},
+    )
     fridge_data = cursor.fetchall()
 
     if not fridge_data:
@@ -31,7 +34,8 @@ def deleteFridge(cursor):
 
     if len(matching_items) > 1:
         cursor.execute(
-            "SELECT food_id, food_name, food_pieces, expiration_date FROM Fridge"
+            "SELECT food_id, food_name, food_pieces, expiration_date FROM Fridge WHERE user_id = :logged_in_user",
+            {"logged_in_user": logged_in_user},
         )  # 유통기한 정보 추가
         table_data = cursor.fetchall()
         table_headers = ["food_id", "음식 이름", "음식 갯수", "유통기한"]
@@ -76,13 +80,14 @@ def deleteFridge(cursor):
             break
 
     cursor.execute(
-        "UPDATE Fridge SET food_pieces = food_pieces - :amount WHERE food_id = :food_id",
-        {"amount": amount, "food_id": food_id},
+        "UPDATE Fridge SET food_pieces = food_pieces - :amount WHERE food_id = :food_id AND user_id = :logged_in_user",
+        {"amount": amount, "food_id": food_id, "logged_in_user": logged_in_user},
     )
 
     if available_pieces == amount:
         cursor.execute(
-            "DELETE FROM Fridge WHERE food_id = :food_id", {"food_id": food_id}
+            "DELETE FROM Fridge WHERE food_id = :food_id AND user_id = :logged_in_user",
+            {"food_id": food_id, "logged_in_user": logged_in_user},
         )
 
     cursor.connection.commit()
