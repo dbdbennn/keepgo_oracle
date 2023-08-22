@@ -80,13 +80,17 @@ def deleteFridge(cursor, logged_in_user):
             break
 
     cursor.execute(
-        "UPDATE Fridge SET food_pieces = food_pieces - :amount WHERE food_id = :food_id AND user_id = :logged_in_user",
+        """UPDATE Fridge SET food_pieces = food_pieces - :amount 
+            WHERE food_id = :food_id 
+            AND user_id = :logged_in_user""",
         {"amount": amount, "food_id": food_id, "logged_in_user": logged_in_user},
     )
 
     if available_pieces == amount:
         cursor.execute(
-            "DELETE FROM Fridge WHERE food_id = :food_id AND user_id = :logged_in_user",
+            """DELETE FROM Fridge 
+                WHERE food_id = :food_id 
+                AND user_id = :logged_in_user""",
             {"food_id": food_id, "logged_in_user": logged_in_user},
         )
 

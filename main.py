@@ -135,7 +135,7 @@ print(
 ,--. ,--. (,------.(,------. _.`     \        ,----.     .-'),-----. 
 |  .'   /  |  .---' |  .---'(__...--''       '  .-./-') ( OO'  .-.  '
 |      /,  |  |     |  |     |  /  | |       |  |_( O- )/   |  | |  |
-|     ' _)(|  '--. (|  '--.  |  |_.' |       |  | .--, \\_) |  |\|  |
+|     ' _)(|  '--. (|  '--.  |  |_.' |       |  | .--, \\_)  |  |\|  |
 |  .   \   |  .--'  |  .--'  |  .___.'      (|  | '. (_/  \ |  | |  |
 |  |\   \  |  `---. |  `---. |  |            |  '--'  |    `'  '-'  '
 `--' '--'  `------' `------' `--'             `------'       `-----' 
@@ -170,7 +170,7 @@ def create_users_table():
             if logged_in_user != None:
                 main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
             else:
-                print(sc.str_Blue("\t로그인을 하지 못했습니다."))
+                print(sc.str_Blue("\t로그인 하지 못했습니다."))
         elif login_menu == "2":
             signup(new_cursor, new_connection)  # 회원가입 로직 실행
 
@@ -190,7 +190,7 @@ def create_users_table():
                     if logged_in_user != None:
                         main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
                     else:
-                        print(sc.str_Red("\t로그인을 하지 못했습니다."))
+                        print(sc.str_Red("\t로그인 하지 못했습니다."))
                 elif login_menu == "2":
                     signup(new_cursor, new_connection)  # 회원가입 로직 실행
 

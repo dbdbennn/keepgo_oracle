@@ -31,7 +31,8 @@ def inputFridge(cursor, logged_in_user):
     cursor.execute(
         """INSERT INTO 
             Fridge (food_name, expiration_date, food_pieces, user_id) 
-            VALUES (:food_name, TO_DATE(:expiration_date, 'YYYY-MM-DD'), :food_pieces, :user_id)""",
+            VALUES (:food_name, TO_DATE(:expiration_date, 'YYYY-MM-DD'), 
+            :food_pieces, :user_id)""",
         {
             "food_name": name,
             "expiration_date": expiration_date,
