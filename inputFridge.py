@@ -2,7 +2,7 @@ import isDate as id
 import strChanger as sc
 
 
-def inputFridge(cursor):
+def inputFridge(cursor, logged_in_user):
     print("\n냉장고에 음식 넣기 + 🍅 + 🥕 + 🥬 + 🥩 + 🥚 + 🍇 + 🥔 + 🧃")
 
     while True:
@@ -30,12 +30,13 @@ def inputFridge(cursor):
 
     cursor.execute(
         """INSERT INTO 
-            Fridge (food_name, expiration_date, food_pieces) 
-            VALUES (:food_name, TO_DATE(:expiration_date, 'YYYY-MM-DD'), :food_pieces)""",
+            Fridge (food_name, expiration_date, food_pieces, user_id) 
+            VALUES (:food_name, TO_DATE(:expiration_date, 'YYYY-MM-DD'), :food_pieces, :user_id)""",
         {
             "food_name": name,
             "expiration_date": expiration_date,
             "food_pieces": food_pieces,
+            "user_id": logged_in_user,
         },
     )
     cursor.connection.commit()

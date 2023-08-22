@@ -15,6 +15,8 @@ from deleteFridge import deleteFridge
 from setFridge import setFridge
 from exdateFridge import exdateFridge
 from exitFridge import exitFridge
+from signup import signup
+from login import login
 import strChanger as sc
 import cx_Oracle
 
@@ -59,6 +61,29 @@ new_dsn = cx_Oracle.makedsn(hostname, port, service_name=service_name)
 new_connection = cx_Oracle.connect("KEEPGO", "keepgo", dsn=new_dsn)
 new_cursor = new_connection.cursor()
 
+# 'Users' 테이블이 이미 존재하지 않는 경우에만 테이블 생성
+existing_table_query = """
+    SELECT COUNT(*)
+    FROM all_tables
+    WHERE owner = 'KEEPGO' AND table_name = 'USERS'
+"""
+new_cursor.execute(existing_table_query)
+table_count = new_cursor.fetchone()[0]
+
+if table_count == 0:
+    create_table_query = """
+        CREATE TABLE USERS (
+            user_id VARCHAR2(255) PRIMARY KEY,
+            user_pw NUMBER(4)
+        )
+    """
+    new_cursor = new_connection.cursor()
+    new_cursor.execute(create_table_query)
+    new_connection.commit()
+    print("Table 'Users' and trigger created successfully.")
+else:
+    print("Table 'Users' already exists.")
+
 # 'Fridge' 테이블이 이미 존재하지 않는 경우에만 테이블 생성
 existing_table_query = """
     SELECT COUNT(*)
@@ -74,7 +99,11 @@ if table_count == 0:
             food_id NUMBER PRIMARY KEY,
             food_name VARCHAR2(255),
             expiration_date DATE,
-            food_pieces NUMBER(3)
+            food_pieces NUMBER(3),
+            user_id VARCHAR2(255),
+            CONSTRAINT fk_user_id
+                FOREIGN KEY (user_id)
+                REFERENCES Users(user_id)
         )
     """
     new_cursor = new_connection.cursor()
@@ -115,9 +144,43 @@ print(
     )
 )
 
+logged_in_user = None
+
+
+def create_users_table():
+    global logged_in_user
+    while True:
+        print(
+            """╭────────────────────────────────────────────────────╮
+│        ,--,--,--.  ,---.  ,--,--,  ,--.,--.        │
+│        |        | | .-. : |      \ |  ||  |        │
+│        |  |  |  | \   --. |  ||  | '  ''  '        │
+│        `--`--`--'  `----' `--''--'  `----'         │
+│                                                    │"""
+        )
+        # 로그인, 회원가입, 프로그램 종료 메뉴 출력
+        print("│\t\t1. 로그인                            │")
+        print("│\t\t2. 회원가입                          │")
+        print("│\t\t3. 프로그램 종료                     │")
+        print("╰" + "─" * 52 + "╯")
+        print()
+
+        login_menu = input("\t\t메뉴 선택 > ")
+
+        if login_menu == "1":
+            logged_in_user = login(new_cursor, new_connection)  # 로그인 로직 실행
+            main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
+        elif login_menu == "2":
+            signup(new_cursor, new_connection)  # 회원가입 로직 실행
+
+        elif login_menu == "3":
+            exit()
+        else:
+            print("올바른 메뉴를 선택해주세요.")
+
 
 # main
-def main():
+def main(logged_in_user):
     while True:  # 무한 루프로 메뉴 선택을 계속 받음
         # 메뉴창 출력문
         print(
@@ -142,11 +205,11 @@ def main():
         menu = input("\t\t메뉴 선택 > ")
 
         if menu == "1":
-            printFridge(new_cursor)  # printFridge 함수 실행
+            printFridge(new_cursor, logged_in_user)  # printFridge 함수 실행
         elif menu == "2":
             exdateFridge(new_cursor)  # exdateFridge 함수 실행
         elif menu == "3":
-            inputFridge(new_cursor)
+            inputFridge(new_cursor, logged_in_user)
         elif menu == "4":
             setFridge(new_cursor)
         elif menu == "5":
@@ -197,4 +260,4 @@ def main():
         admin_connection.close()
 
 
-main()
+create_users_table()

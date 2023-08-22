@@ -3,7 +3,7 @@ import strChanger as sc
 import date_calculate as dc
 
 
-def printFridge(new_cursor):
+def printFridge(new_cursor, logged_in_user):
     print()
     print(sc.str_Yellow("냉장고 열어보기 * 🍅 * 🥕 * 🥬 * 🥩 * 🥚 * 🍇 * 🥔 * 🧀"))
     print()
@@ -11,10 +11,11 @@ def printFridge(new_cursor):
     select_data_query = """
         SELECT food_name, expiration_date, food_pieces
         FROM Fridge
+        WHERE user_id = :logged_in_user
         ORDER BY EXPIRATION_DATE
     """
 
-    new_cursor.execute(select_data_query)
+    new_cursor.execute(select_data_query, logged_in_user=logged_in_user)
     selected_data = new_cursor.fetchall()
 
     if len(selected_data) == 0:
