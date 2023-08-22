@@ -4,13 +4,17 @@ from datetime import datetime
 import strChanger as sc
 
 
-def setFridge(cursor):
+def setFridge(cursor, logged_in_user):
     print()
     print("음식 정보 바꾸기 • 🍅 • 🥕 • 🥬 • 🥩 • 🥚 • 🍇 • 🥔 • 🥗")
 
-    cursor.execute(
-        "SELECT food_id, food_name, expiration_date, food_pieces FROM Fridge"
-    )
+    # 로그인한 사용자의 냉장고 데이터만 조회
+    select_query = """
+        SELECT food_id, food_name, expiration_date, food_pieces
+        FROM Fridge
+        WHERE user_id = :user_id
+    """
+    cursor.execute(select_query, user_id=logged_in_user)
     fridge_data = cursor.fetchall()
 
     if len(fridge_data) == 0:
@@ -57,6 +61,7 @@ def setFridge(cursor):
     else:
         food_id = matching_items[0][0]
 
+    # 수정 옵션을 선택
     set_list = [['음식 이름은 "1" ', '음식 갯수는 "2" ', '유통기한은 "3" ']]
     print("\n" + tabulate(set_list, stralign="center", tablefmt="rounded_grid"))
 

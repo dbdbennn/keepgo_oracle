@@ -144,8 +144,6 @@ print(
     )
 )
 
-logged_in_user = None
-
 
 def create_users_table():
     global logged_in_user

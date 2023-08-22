@@ -23,22 +23,21 @@ def exdateFridge(new_cursor, logged_in_user):
         if isinstance(inputMenu, str):
             return
 
-    create_view_query = """
+    create_view_query = f"""
         CREATE OR REPLACE VIEW ExpirationCountsView AS
         SELECT
             (SELECT SUM(food_pieces) FROM Fridge 
-                WHERE TRUNC(expiration_date) = TRUNC(SYSDATE)) AS today_expired,
+                WHERE TRUNC(expiration_date) = TRUNC(SYSDATE) AND user_id = '{logged_in_user}') AS today_expired,
             (SELECT SUM(food_pieces) FROM Fridge 
-                WHERE expiration_date < TRUNC(SYSDATE)) AS expired,
+                WHERE expiration_date < TRUNC(SYSDATE) AND user_id = '{logged_in_user}') AS expired,
             (SELECT SUM(food_pieces) FROM Fridge 
-                WHERE TRUNC(expiration_date) BETWEEN TRUNC(SYSDATE) + 1 AND TRUNC(SYSDATE) + 7) AS within_7_days,
+                WHERE TRUNC(expiration_date) BETWEEN TRUNC(SYSDATE) + 1 AND TRUNC(SYSDATE) + 7 AND user_id = '{logged_in_user}') AS within_7_days,
             (SELECT SUM(food_pieces) FROM Fridge 
-                WHERE TRUNC(expiration_date) BETWEEN TRUNC(SYSDATE) + 8 AND TRUNC(SYSDATE) + 30) AS within_30_days,
+                WHERE TRUNC(expiration_date) BETWEEN TRUNC(SYSDATE) + 8 AND TRUNC(SYSDATE) + 30 AND user_id = '{logged_in_user}') AS within_30_days,
             (SELECT SUM(food_pieces) FROM Fridge 
-                WHERE expiration_date > TRUNC(SYSDATE) + 31) AS more_than_30_days
+                WHERE expiration_date > TRUNC(SYSDATE) + 31 AND user_id = '{logged_in_user}') AS more_than_30_days
         FROM dual
-
-        """
+    """
     new_cursor.execute(create_view_query)
 
     select_view_query = "SELECT * FROM ExpirationCountsView"
