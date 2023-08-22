@@ -57,7 +57,7 @@ def setFridge(cursor):
     else:
         food_id = matching_items[0][0]
 
-    set_list = [['음식 이름은 "1️" ', '음식 갯수는 "2️" ', '유통기한은 "3️" ']]
+    set_list = [['음식 이름은 "1" ', '음식 갯수는 "2" ', '유통기한은 "3" ']]
     print("\n" + tabulate(set_list, stralign="center", tablefmt="rounded_grid"))
 
     menu = input("\n\t무엇을 수정하시겠어요? > ")

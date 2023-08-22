@@ -29,7 +29,9 @@ def inputFridge(cursor):
             print("\n\t\033[31m❗ YYYY-MM-DD 형태로 입력해주세요.\033[0m")
 
     cursor.execute(
-        "INSERT INTO Fridge (food_name, expiration_date, food_pieces) VALUES (:food_name, TO_DATE(:expiration_date, 'YYYY-MM-DD'), :food_pieces)",
+        """INSERT INTO 
+            Fridge (food_name, expiration_date, food_pieces) 
+            VALUES (:food_name, TO_DATE(:expiration_date, 'YYYY-MM-DD'), :food_pieces)""",
         {
             "food_name": name,
             "expiration_date": expiration_date,
