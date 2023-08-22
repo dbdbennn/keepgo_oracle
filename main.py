@@ -167,14 +167,40 @@ def create_users_table():
 
         if login_menu == "1":
             logged_in_user = login(new_cursor, new_connection)  # 로그인 로직 실행
-            main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
+            if logged_in_user != None:
+                main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
+            else:
+                print(sc.str_Blue("\t로그인을 하지 못했습니다."))
         elif login_menu == "2":
             signup(new_cursor, new_connection)  # 회원가입 로직 실행
 
         elif login_menu == "3":
-            exit()
+            isExit = exitFridge()
+            if isExit == "1":
+                main()
+            else:
+                exit()
+            break  # 무한 루프 종료
         else:
-            print("올바른 메뉴를 선택해주세요.")
+            while login_menu != "1" and login_menu != "2" and login_menu != "3":
+                print()
+                login_menu = input(sc.str_Red("\t\t올바른 메뉴를 선택해주세요 > "))
+                if login_menu == "1":
+                    logged_in_user = login(new_cursor, new_connection)  # 로그인 로직 실행
+                    if logged_in_user != None:
+                        main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
+                    else:
+                        print(sc.str_Red("\t로그인을 하지 못했습니다."))
+                elif login_menu == "2":
+                    signup(new_cursor, new_connection)  # 회원가입 로직 실행
+
+                elif login_menu == "3":
+                    isExit = exitFridge()
+                    if isExit == "1":
+                        main()
+                    else:
+                        exit()
+                    break  # 무한 루프 종료
 
 
 # main
@@ -230,15 +256,15 @@ def main(logged_in_user):
                 print()
                 menu = input("\t다시 선택해주세요 > ")
                 if menu == "1":
-                    printFridge(new_cursor)  # printFridge 함수 실행
+                    printFridge(new_cursor, logged_in_user)  # printFridge 함수 실행
                 elif menu == "2":
-                    exdateFridge(new_cursor)  # exdateFridge 함수 실행
+                    exdateFridge(new_cursor, logged_in_user)  # exdateFridge 함수 실행
                 elif menu == "3":
-                    inputFridge(new_cursor)
+                    inputFridge(new_cursor, logged_in_user)
                 elif menu == "4":
-                    setFridge(new_cursor)
+                    setFridge(new_cursor, logged_in_user)
                 elif menu == "5":
-                    deleteFridge(new_cursor)
+                    deleteFridge(new_cursor, logged_in_user)
                 elif menu == "6":
                     isExit = exitFridge()
                     if isExit == "1":
