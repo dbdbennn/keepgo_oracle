@@ -23,8 +23,8 @@ import cx_Oracle
 
 # 연결 정보
 admin_username = "system"
-admin_password = "0503"
-# admin_password = "1234"
+# admin_password = "0503"
+admin_password = "1234"
 hostname = "localhost"
 port = "1521"
 service_name = "XE"

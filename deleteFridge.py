@@ -1,7 +1,6 @@
 import strChanger as sc
 from tabulate import tabulate
 
-
 def deleteFridge(cursor, logged_in_user):
     print()
     print(sc.str_Cyan("냉장고에서 음식 꺼내기 - 🍅 - 🥕 - 🥬 - 🥩 - 🥚 - 🍇 - 🥔 - 🍠"))
@@ -36,7 +35,7 @@ def deleteFridge(cursor, logged_in_user):
         cursor.execute(
             "SELECT food_id, food_name, food_pieces, expiration_date FROM Fridge WHERE user_id = :logged_in_user",
             {"logged_in_user": logged_in_user},
-        )  # 유통기한 정보 추가
+        )
         table_data = cursor.fetchall()
         table_headers = ["food_id", "음식 이름", "음식 갯수", "유통기한"]
         table_data = [
@@ -63,7 +62,7 @@ def deleteFridge(cursor, logged_in_user):
     else:
         food_id = matching_items[0][0]
 
-    available_pieces = matching_items[0][2]
+    available_pieces = [item[2] for item in matching_items if item[0] == food_id][0]
 
     while True:
         amount_input = input("\n\t\t꺼낼 음식의 갯수는? > ")
@@ -86,21 +85,23 @@ def deleteFridge(cursor, logged_in_user):
         {"amount": amount, "food_id": food_id, "logged_in_user": logged_in_user},
     )
 
+    cursor.connection.commit()
+
     if available_pieces == amount:
+        print("\n\t\t" + sc.str_Blue(name) + "을(를) 모두 꺼냈습니다!")
         cursor.execute(
             """DELETE FROM Fridge 
                 WHERE food_id = :food_id 
                 AND user_id = :logged_in_user""",
             {"food_id": food_id, "logged_in_user": logged_in_user},
         )
-
-    cursor.connection.commit()
-
-    if available_pieces == amount:
-        print("\n\t\t" + sc.str_Blue(name) + "을(를) 모두 꺼냈습니다!")
+        cursor.connection.commit()
     else:
         print("\n\t\t" + sc.str_Blue(name) + "을(를) " + str(amount) + "개 꺼냈습니다!")
+
     print()
     inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
     if isinstance(inputMenu, str):
         return
+
+# 함수를 적절한 인자와 함께 호출하세요
