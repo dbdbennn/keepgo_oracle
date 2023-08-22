@@ -34,7 +34,7 @@ def ca(input_date):
 
     if date_gap <= 7:
         return sc.str_Red("일주일 정도 남았어요 ❕")
-    elif date_gap >= 30:
+    elif date_gap >= 31:
         return sc.str_Cyan("한 달 넘게 남았어요 😊 ")
     else:
         return sc.str_Yellow(str(date_gap) + "일 남았어요 🤔 ")
