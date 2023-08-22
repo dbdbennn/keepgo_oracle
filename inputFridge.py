@@ -11,16 +11,6 @@ def inputFridge(cursor):
         if not name.strip():  # Check if the input is empty or just whitespace
             print("\n\t\033[31m❗ 음식 이름을 입력해주세요.\033[0m")
             continue
-
-        # Check if the food_name already exists in the database
-        cursor.execute(
-            "SELECT COUNT(*) FROM Fridge WHERE food_name = :food_name",
-            {"food_name": name},
-        )
-        existing_count = cursor.fetchone()[0]
-        if existing_count > 0:
-            print("\n\t\033[31m❗ 이미 존재하는 음식 이름입니다.\033[0m")
-            continue  # Start the loop over to get a new food_name
         else:
             break  # Proceed if the food_name is unique
 

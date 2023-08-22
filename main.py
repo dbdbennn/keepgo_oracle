@@ -71,19 +71,31 @@ table_count = new_cursor.fetchone()[0]
 if table_count == 0:
     create_table_query = """
         CREATE TABLE FRIDGE (
-            food_name VARCHAR2(255) primary key,
+            food_id NUMBER PRIMARY KEY,
+            food_name VARCHAR2(255),
             expiration_date DATE,
             food_pieces NUMBER(3)
         )
     """
+    new_cursor = new_connection.cursor()
     new_cursor.execute(create_table_query)
+
+    create_trigger_query = """
+        CREATE OR REPLACE TRIGGER FRIDGE_TRIGGER
+        BEFORE INSERT ON FRIDGE
+        FOR EACH ROW
+        BEGIN
+            SELECT NVL(MAX(food_id), 0) + 1 INTO :new.food_id FROM FRIDGE;
+        END;
+    """
+    new_cursor.execute(create_trigger_query)
+
     new_connection.commit()
-    print("Table 'FRIDGE' created successfully.")
+    print("Table 'FRIDGE' and trigger created successfully.")
 else:
     print("Table 'FRIDGE' already exists.")
 
 print("All settings are Successful!")
-
 
 ####################################################
 print(

@@ -9,7 +9,7 @@ def printFridge(new_cursor):
     print()
 
     select_data_query = """
-        SELECT *
+        SELECT food_name, expiration_date, food_pieces
         FROM Fridge
         ORDER BY EXPIRATION_DATE
     """
