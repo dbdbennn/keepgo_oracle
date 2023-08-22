@@ -2,17 +2,18 @@ from tabulate import tabulate
 import strChanger as sc
 
 
-def exdateFridge(new_cursor):
+def exdateFridge(new_cursor, logged_in_user):
     print()
     print(sc.str_Yellow("기한별로 갯수보기 * 🍅 * 🥕 * 🥬 * 🥩 * 🥚 * 🍇 * 🥔 * 🧀"))
 
     select_data_query = """
         SELECT *
         FROM Fridge
+        WHERE user_id = :logged_in_user
         ORDER BY EXPIRATION_DATE
     """
 
-    new_cursor.execute(select_data_query)
+    new_cursor.execute(select_data_query, logged_in_user=logged_in_user)
     selected_data = new_cursor.fetchall()
 
     if len(selected_data) == 0:

@@ -207,13 +207,13 @@ def main(logged_in_user):
         if menu == "1":
             printFridge(new_cursor, logged_in_user)  # printFridge 함수 실행
         elif menu == "2":
-            exdateFridge(new_cursor)  # exdateFridge 함수 실행
+            exdateFridge(new_cursor, logged_in_user)  # exdateFridge 함수 실행
         elif menu == "3":
             inputFridge(new_cursor, logged_in_user)
         elif menu == "4":
-            setFridge(new_cursor)
+            setFridge(new_cursor, logged_in_user)
         elif menu == "5":
-            deleteFridge(new_cursor)
+            deleteFridge(new_cursor, logged_in_user)
         elif menu == "6":
             isExit = exitFridge()
             if isExit == "1":
