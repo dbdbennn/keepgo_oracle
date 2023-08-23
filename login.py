@@ -25,7 +25,7 @@ def login(admin_cursor, admin_connection):
         user_pw = input("\t비밀번호를 입력하세요 > ")
 
         if not is_numeric(user_pw):
-            print(sc.str_Red("\t비밀번호는 숫자만 가능합니다. 다시 입력해주세요."))
+            print(sc.str_Red("\t❗ 비밀번호는 숫자만 가능합니다. 다시 입력해주세요."))
             print()
             continue
 
@@ -44,7 +44,7 @@ def login(admin_cursor, admin_connection):
             print()
             return result[0]  # 로그인한 사용자의 user_id 반환
 
-        print(sc.str_Red("\t로그인 실패: 사용자 정보가 일치하지 않습니다."))
+        print(sc.str_Red("\t❗ 로그인 실패: 사용자 정보가 일치하지 않습니다."))
         retry = input("\t다시 로그인하시겠습니까? (Y/N) > ")
         print()
         if retry.lower() != "y":

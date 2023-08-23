@@ -170,34 +170,36 @@ def create_users_table():
             if logged_in_user != None:
                 main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
             else:
-                print(sc.str_Blue("\t로그인 하지 못했습니다."))
+                print(sc.str_Red("\t❗ 로그인 하지 못했습니다."))
+                print()
         elif login_menu == "2":
             signup(new_cursor, new_connection)  # 회원가입 로직 실행
 
         elif login_menu == "3":
             isExit = exitFridge()
             if isExit == "1":
-                main()
+                create_users_table()
             else:
                 exit()
             break  # 무한 루프 종료
         else:
             while login_menu != "1" and login_menu != "2" and login_menu != "3":
                 print()
-                login_menu = input(sc.str_Red("\t\t올바른 메뉴를 선택해주세요 > "))
+                login_menu = input("\t다시 선택해주세요 > ")
                 if login_menu == "1":
                     logged_in_user = login(new_cursor, new_connection)  # 로그인 로직 실행
                     if logged_in_user != None:
                         main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
                     else:
-                        print(sc.str_Red("\t로그인 하지 못했습니다."))
+                        print(sc.str_Red("\t❗ 로그인 하지 못했습니다."))
+                        print()
                 elif login_menu == "2":
                     signup(new_cursor, new_connection)  # 회원가입 로직 실행
 
                 elif login_menu == "3":
                     isExit = exitFridge()
                     if isExit == "1":
-                        main()
+                        create_users_table()
                     else:
                         exit()
                     break  # 무한 루프 종료
@@ -241,7 +243,7 @@ def main(logged_in_user):
         elif menu == "6":
             isExit = exitFridge()
             if isExit == "1":
-                main()
+                main(logged_in_user)
             else:
                 exit()
             break  # 무한 루프 종료
@@ -268,7 +270,7 @@ def main(logged_in_user):
                 elif menu == "6":
                     isExit = exitFridge()
                     if isExit == "1":
-                        main()
+                        main(logged_in_user)
                     else:
                         exit()
                     break  # 무한 루프 종료

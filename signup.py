@@ -26,7 +26,7 @@ def signup(new_cursor, new_connection):
         user_count = new_cursor.fetchone()[0]
 
         if user_count > 0:
-            print(sc.str_Red("\t이미 존재하는 ID입니다. 다른 ID를 입력해주세요."))
+            print(sc.str_Red("\t❗ 이미 존재하는 ID입니다. 다른 ID를 입력해주세요."))
             print()
             continue
 
@@ -35,12 +35,12 @@ def signup(new_cursor, new_connection):
             new_user_pw_confirm = input("\t비밀번호를 다시 입력하세요 > ")
 
             if len(new_user_pw) != 4 or not new_user_pw.isdigit():
-                print(sc.str_Red("\t비밀번호는 4자리 숫자로 입력해주세요."))
+                print(sc.str_Red("\t❗ 비밀번호는 4자리 숫자로 입력해주세요."))
                 print()
                 continue
 
             if new_user_pw != new_user_pw_confirm:
-                print(sc.str_Red("\t비밀번호가 일치하지 않습니다. 다시 입력해주세요."))
+                print(sc.str_Red("\t❗ 비밀번호가 일치하지 않습니다. 다시 입력해주세요."))
                 print()
                 continue
 
