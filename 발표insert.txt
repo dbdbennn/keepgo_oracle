@@ -1,6 +1,7 @@
-Insert into FRIDGE (FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES) values ('당근',to_date('23/09/02','RR/MM/DD'),8);
-Insert into FRIDGE (FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES) values ('달걀',to_date('23/08/28','RR/MM/DD'),6);
-Insert into FRIDGE (FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES) values ('고등어',to_date('23/08/21','RR/MM/DD'),2);
-Insert into FRIDGE (FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES) values ('당근',to_date('23/09/30','RR/MM/DD'),3);
-Insert into FRIDGE (FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES) values ('스팸',to_date('23/08/30','RR/MM/DD'),4);
+Insert into KEEPGO.FRIDGE (FOOD_ID,FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES,USER_ID) values (1,'당근',to_date('23/08/29','RR/MM/DD'),10,'jungeun');
+Insert into KEEPGO.FRIDGE (FOOD_ID,FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES,USER_ID) values (2,'달걀',to_date('23/10/01','RR/MM/DD'),30,'jungeun');
+Insert into KEEPGO.FRIDGE (FOOD_ID,FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES,USER_ID) values (3,'토마토',to_date('23/08/25','RR/MM/DD'),5,'jungeun');
+Insert into KEEPGO.FRIDGE (FOOD_ID,FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES,USER_ID) values (4,'감자',to_date('23/08/23','RR/MM/DD'),4,'jungeun');
+Insert into KEEPGO.FRIDGE (FOOD_ID,FOOD_NAME,EXPIRATION_DATE,FOOD_PIECES,USER_ID) values (5,'당근',to_date('23/09/14','RR/MM/DD'),4,'jungeun');
+
 commit;
