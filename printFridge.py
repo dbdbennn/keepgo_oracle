@@ -44,7 +44,7 @@ def printFridge(new_cursor, logged_in_user):
         )
 
         print(table)
-
+        print()
         inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
         if isinstance(inputMenu, str):
             return
