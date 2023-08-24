@@ -23,8 +23,8 @@ import cx_Oracle
 
 # 연결 정보
 admin_username = "system"
-# admin_password = "0503"
-admin_password = "1234"
+admin_password = "0503"
+# admin_password = "1234"
 hostname = "localhost"
 port = "1521"
 service_name = "XE"
@@ -80,7 +80,7 @@ if table_count == 0:
     new_cursor = new_connection.cursor()
     new_cursor.execute(create_table_query)
     new_connection.commit()
-    print("Table 'Users' and trigger created successfully.")
+    print("Table 'Users' created successfully.")
 else:
     print("Table 'Users' already exists.")
 

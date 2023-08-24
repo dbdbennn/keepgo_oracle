@@ -1,6 +1,7 @@
 import strChanger as sc
 from tabulate import tabulate
 
+
 def deleteFridge(cursor, logged_in_user):
     print()
     print(sc.str_Cyan("냉장고에서 음식 꺼내기 - 🍅 - 🥕 - 🥬 - 🥩 - 🥚 - 🍇 - 🥔 - 🍠"))
@@ -103,5 +104,6 @@ def deleteFridge(cursor, logged_in_user):
     inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
     if isinstance(inputMenu, str):
         return
+
 
 # 함수를 적절한 인자와 함께 호출하세요
