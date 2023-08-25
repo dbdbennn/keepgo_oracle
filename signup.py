@@ -29,6 +29,8 @@ def signup(new_cursor, new_connection):
             print(sc.str_Red("\t❗ 이미 존재하는 ID입니다. 다른 ID를 입력해주세요."))
             print()
             continue
+        
+        new_user_name = input('\t사용할 이름을 입력하세요 > ')
 
         while True:
             new_user_pw = input("\t사용할 비밀번호(4자리 숫자)를 입력하세요 > ")
