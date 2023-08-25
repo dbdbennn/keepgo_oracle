@@ -15,6 +15,7 @@ from deleteFridge import deleteFridge
 from setFridge import setFridge
 from exdateFridge import exdateFridge
 from exitFridge import exitFridge
+from userFridge import userFridge
 from signup import signup
 from login import login
 import strChanger as sc
@@ -222,7 +223,8 @@ def main(logged_in_user):
         print("│\t\t3. 냉장고에 음식 넣기                │")
         print("│\t\t4. 음식 정보 바꾸기                  │")
         print("│\t\t5. 냉장고에서 음식 꺼내기            │")
-        print("│\t\t6. 프로그램 종료                     │")
+        print("│\t\t6. 사용자별 음식갯수                 │")
+        print("│\t\t7. 프로그램 종료                     │")
         print("╰" + "─" * 52 + "╯")
         print()
         # 메뉴창 출력 끝
@@ -241,11 +243,9 @@ def main(logged_in_user):
         elif menu == "5":
             deleteFridge(new_cursor, logged_in_user)
         elif menu == "6":
-            isExit = exitFridge()
-            if isExit == "1":
-                main(logged_in_user)
-            else:
-                exit()
+            userFridge(new_cursor)  # 수정된 부분
+        elif menu == "7":
+            exitFridge()
             break  # 무한 루프 종료
         else:  # 다른 수(str형태)가 입력됐을 때 while문을 돌린다.
             while (
@@ -254,6 +254,8 @@ def main(logged_in_user):
                 and menu != "3"
                 and menu != "4"
                 and menu != "5"
+                and menu != "6"
+                and menu != "7"
             ):
                 print()
                 menu = input("\t다시 선택해주세요 > ")
@@ -268,6 +270,8 @@ def main(logged_in_user):
                 elif menu == "5":
                     deleteFridge(new_cursor, logged_in_user)
                 elif menu == "6":
+                    userFridge(new_cursor)
+                elif menu == "7":
                     isExit = exitFridge()
                     if isExit == "1":
                         main(logged_in_user)
