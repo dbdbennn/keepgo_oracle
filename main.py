@@ -243,9 +243,13 @@ def main(logged_in_user):
         elif menu == "5":
             deleteFridge(new_cursor, logged_in_user)
         elif menu == "6":
-            userFridge(new_cursor)  # 수정된 부분
+            userFridge(new_cursor)
         elif menu == "7":
-            exitFridge()
+            isExit = exitFridge()
+            if isExit == "1":
+                main(logged_in_user)
+            else:
+                exit()
             break  # 무한 루프 종료
         else:  # 다른 수(str형태)가 입력됐을 때 while문을 돌린다.
             while (
