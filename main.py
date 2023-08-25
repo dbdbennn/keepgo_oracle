@@ -222,9 +222,8 @@ def main(logged_in_user):
         print("│\t\t2. 기한별로 갯수보기                 │")
         print("│\t\t3. 냉장고에 음식 넣기                │")
         print("│\t\t4. 음식 정보 바꾸기                  │")
-        print("│\t\t5. 냉장고에서 음식 꺼내기            │")
-        print("│\t\t6. 사용자별 음식갯수                 │")
-        print("│\t\t7. 프로그램 종료                     │")
+        print("│\t\t5. 사용자별 음식갯수                 │")
+        print("│\t\t6. 프로그램 종료                     │")
         print("╰" + "─" * 52 + "╯")
         print()
         # 메뉴창 출력 끝
@@ -241,10 +240,8 @@ def main(logged_in_user):
         elif menu == "4":
             setFridge(new_cursor, logged_in_user)
         elif menu == "5":
-            deleteFridge(new_cursor, logged_in_user)
-        elif menu == "6":
             userFridge(new_cursor)
-        elif menu == "7":
+        elif menu == "6":
             isExit = exitFridge()
             if isExit == "1":
                 main(logged_in_user)
@@ -272,10 +269,8 @@ def main(logged_in_user):
                 elif menu == "4":
                     setFridge(new_cursor, logged_in_user)
                 elif menu == "5":
-                    deleteFridge(new_cursor, logged_in_user)
-                elif menu == "6":
                     userFridge(new_cursor)
-                elif menu == "7":
+                elif menu == "6":
                     isExit = exitFridge()
                     if isExit == "1":
                         main(logged_in_user)
