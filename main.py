@@ -225,6 +225,7 @@ def main(logged_in_user):
         print("│\t\t4. 음식 정보 바꾸기                  │")
         print("│\t\t5. 사용자별 음식갯수                 │")
         print("│\t\t6. 프로그램 종료                     │")
+        print("│\t\t7. 로그아웃                          │")
         print("╰" + "─" * 52 + "╯")
         print()
         # 메뉴창 출력 끝
@@ -249,6 +250,11 @@ def main(logged_in_user):
             else:
                 exit()
             break  # 무한 루프 종료
+        elif menu == "7":
+            print()
+            print(sc.str_Blue("\t\t로그아웃이 완료되었습니다."))
+            print()
+            create_users_table()
         else:  # 다른 수(str형태)가 입력됐을 때 while문을 돌린다.
             while (
                 menu != "1"
@@ -278,6 +284,11 @@ def main(logged_in_user):
                     else:
                         exit()
                     break  # 무한 루프 종료
+                elif menu == "7":
+                    print()
+                    print(sc.str_Blue("\t로그아웃이 완료되었습니다."))
+                    print()
+                    create_users_table()
 
     # 프로그램 종료 시에만 연결 해제
     if new_cursor:
