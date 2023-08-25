@@ -32,6 +32,7 @@ def userFridge(new_cursor):
     )
 
     print(table)
+    print()
 
     inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
     if isinstance(inputMenu, str):
