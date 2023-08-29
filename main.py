@@ -187,6 +187,7 @@ def create_users_table():
             clear()
             isExit = exitFridge()
             if isExit == "1":
+                clear()
                 create_users_table()
             else:
                 exit()
@@ -211,6 +212,7 @@ def create_users_table():
                     clear()
                     isExit = exitFridge()
                     if isExit == "1":
+                        clear()
                         create_users_table()
                     else:
                         exit()
@@ -262,6 +264,7 @@ def main(logged_in_user):
             clear()
             isExit = exitFridge()
             if isExit == "1":
+                clear()
                 main(logged_in_user)
             else:
                 exit()
@@ -303,6 +306,7 @@ def main(logged_in_user):
                     clear()
                     isExit = exitFridge()
                     if isExit == "1":
+                        clear()
                         main(logged_in_user)
                     else:
                         exit()
