@@ -2,6 +2,7 @@ from tabulate import tabulate
 from isDate import isDate
 from datetime import datetime
 import strChanger as sc
+from clear import clear
 
 
 def setFridge(cursor, logged_in_user):
@@ -22,6 +23,7 @@ def setFridge(cursor, logged_in_user):
         print()
         inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
         if isinstance(inputMenu, str):
+            clear()
             return
 
     name = input("\n\t수정할 음식은? > ")
@@ -125,4 +127,5 @@ def setFridge(cursor, logged_in_user):
     print()
     inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
     if isinstance(inputMenu, str):
+        clear()
         return

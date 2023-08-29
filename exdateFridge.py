@@ -1,5 +1,6 @@
 from tabulate import tabulate
 import strChanger as sc
+from clear import clear
 
 
 def exdateFridge(new_cursor, logged_in_user):
@@ -21,6 +22,7 @@ def exdateFridge(new_cursor, logged_in_user):
         print()
         inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
         if isinstance(inputMenu, str):
+            clear()
             return
 
     create_view_query = f"""
@@ -71,4 +73,5 @@ def exdateFridge(new_cursor, logged_in_user):
 
     inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
     if isinstance(inputMenu, str):
+        clear()
         return

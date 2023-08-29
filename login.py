@@ -1,4 +1,5 @@
 import strChanger as sc
+from clear import clear
 
 
 def is_numeric(password):
@@ -40,6 +41,7 @@ def login(admin_cursor, admin_connection):
 
         if result:
             print()
+            clear()
             print(sc.str_Blue("\t\t로그인 성공!"))
             print()
             return result[0]  # 로그인한 사용자의 user_id 반환
@@ -48,4 +50,5 @@ def login(admin_cursor, admin_connection):
         retry = input("\t다시 로그인하시겠습니까? (Y/N) > ")
         print()
         if retry.lower() != "y":
+            clear()
             return None  # 로그인 시도 중단

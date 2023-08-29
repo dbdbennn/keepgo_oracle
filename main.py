@@ -19,7 +19,10 @@ from userFridge import userFridge
 from signup import signup
 from login import login
 import strChanger as sc
+from clear import clear
 import cx_Oracle
+
+clear()
 
 
 # 연결 정보
@@ -129,6 +132,7 @@ else:
 print("All settings are Successful!")
 
 ####################################################
+
 print(
     sc.str_Cyan(
         """
@@ -168,6 +172,7 @@ def create_users_table():
         login_menu = input("\t\t메뉴 선택 > ")
 
         if login_menu == "1":
+            clear()
             logged_in_user = login(new_cursor, new_connection)  # 로그인 로직 실행
             if logged_in_user != None:
                 main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
@@ -175,9 +180,11 @@ def create_users_table():
                 print(sc.str_Red("\t❗ 로그인 하지 못했습니다."))
                 print()
         elif login_menu == "2":
+            clear()
             signup(new_cursor, new_connection)  # 회원가입 로직 실행
 
         elif login_menu == "3":
+            clear()
             isExit = exitFridge()
             if isExit == "1":
                 create_users_table()
@@ -189,6 +196,7 @@ def create_users_table():
                 print()
                 login_menu = input("\t다시 선택해주세요 > ")
                 if login_menu == "1":
+                    clear()
                     logged_in_user = login(new_cursor, new_connection)  # 로그인 로직 실행
                     if logged_in_user != None:
                         main(logged_in_user)  # 로그인 후 메뉴 선택 창으로 이동
@@ -196,9 +204,11 @@ def create_users_table():
                         print(sc.str_Red("\t❗ 로그인 하지 못했습니다."))
                         print()
                 elif login_menu == "2":
+                    clear()
                     signup(new_cursor, new_connection)  # 회원가입 로직 실행
 
                 elif login_menu == "3":
+                    clear()
                     isExit = exitFridge()
                     if isExit == "1":
                         create_users_table()
@@ -234,16 +244,22 @@ def main(logged_in_user):
         menu = input("\t\t메뉴 선택 > ")
 
         if menu == "1":
+            clear()
             printFridge(new_cursor, logged_in_user)  # printFridge 함수 실행
         elif menu == "2":
+            clear()
             exdateFridge(new_cursor, logged_in_user)  # exdateFridge 함수 실행
         elif menu == "3":
+            clear()
             inputFridge(new_cursor, logged_in_user)
         elif menu == "4":
+            clear()
             setFridge(new_cursor, logged_in_user)
         elif menu == "5":
+            clear()
             userFridge(new_cursor)
         elif menu == "6":
+            clear()
             isExit = exitFridge()
             if isExit == "1":
                 main(logged_in_user)
@@ -251,6 +267,7 @@ def main(logged_in_user):
                 exit()
             break  # 무한 루프 종료
         elif menu == "7":
+            clear()
             print()
             print(sc.str_Blue("\t\t로그아웃이 완료되었습니다."))
             print()
@@ -268,16 +285,22 @@ def main(logged_in_user):
                 print()
                 menu = input("\t다시 선택해주세요 > ")
                 if menu == "1":
+                    clear()
                     printFridge(new_cursor, logged_in_user)  # printFridge 함수 실행
                 elif menu == "2":
+                    clear()
                     exdateFridge(new_cursor, logged_in_user)  # exdateFridge 함수 실행
                 elif menu == "3":
+                    clear()
                     inputFridge(new_cursor, logged_in_user)
                 elif menu == "4":
+                    clear()
                     setFridge(new_cursor, logged_in_user)
                 elif menu == "5":
+                    clear()
                     userFridge(new_cursor)
                 elif menu == "6":
+                    clear()
                     isExit = exitFridge()
                     if isExit == "1":
                         main(logged_in_user)
@@ -285,6 +308,7 @@ def main(logged_in_user):
                         exit()
                     break  # 무한 루프 종료
                 elif menu == "7":
+                    clear()
                     print()
                     print(sc.str_Blue("\t로그아웃이 완료되었습니다."))
                     print()

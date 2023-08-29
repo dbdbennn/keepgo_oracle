@@ -1,6 +1,7 @@
 from tabulate import tabulate
 import strChanger as sc
 import date_calculate as dc
+from clear import clear
 
 
 def printFridge(new_cursor, logged_in_user):
@@ -23,7 +24,9 @@ def printFridge(new_cursor, logged_in_user):
         print()
         inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
         if isinstance(inputMenu, str):
+            clear()
             return
+
     else:
         table_data = []
         for row in selected_data:
@@ -47,4 +50,5 @@ def printFridge(new_cursor, logged_in_user):
         print()
         inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
         if isinstance(inputMenu, str):
+            clear()
             return

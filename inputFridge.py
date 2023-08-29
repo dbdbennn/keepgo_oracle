@@ -1,5 +1,6 @@
 import isDate as id
 import strChanger as sc
+from clear import clear
 
 
 def inputFridge(cursor, logged_in_user):
@@ -45,4 +46,5 @@ def inputFridge(cursor, logged_in_user):
     print()
     inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
     if isinstance(inputMenu, str):
+        clear()
         return

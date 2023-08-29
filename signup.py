@@ -1,4 +1,5 @@
 import strChanger as sc
+from clear import clear
 
 
 def signup(new_cursor, new_connection):
@@ -61,6 +62,7 @@ def signup(new_cursor, new_connection):
         )
         new_connection.commit()
         print()
+        clear()
         print(sc.str_Blue("\t\t회원가입 성공!"))
         print()
         return new_user_id

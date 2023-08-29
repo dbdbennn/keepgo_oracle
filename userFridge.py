@@ -1,6 +1,7 @@
 from tabulate import tabulate
 import strChanger as sc
 import date_calculate as dc
+from clear import clear
 
 
 def userFridge(new_cursor):
@@ -36,6 +37,7 @@ def userFridge(new_cursor):
 
     inputMenu = input("\t 엔터를 누르면 메뉴로 돌아갑니다 ⬇️  ")
     if isinstance(inputMenu, str):
+        clear()
         return
 
 
